@@ -13,7 +13,7 @@
 # See: https://python-poetry.org/docs/pyproject/
 
 # The following 4 properties are required, otherwise poetry will refuse to work.
-name = "webcam-emulation"
+name = "webcam-automation"
 version = "1.0.0"
 description = ""
 authors = ["Levi Perelman <levi2p@gmail.com>"]
