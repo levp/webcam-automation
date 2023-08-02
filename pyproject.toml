@@ -1,0 +1,59 @@
+#
+# The pyproject.toml file is described by the python language specification
+# itself as a configuration file for python projects.
+#
+# Both Poetry and pytest automatically read this
+# file and use the relevant configurations.
+#
+# https://peps.python.org/pep-0621/
+#
+
+[tool.poetry]
+# Top-level poetry configuration.
+# See: https://python-poetry.org/docs/pyproject/
+
+# The following 4 properties are required, otherwise poetry will refuse to work.
+name = "webcam-emulation"
+version = "1.0.0"
+description = ""
+authors = ["Levi Perelman <levi2p@gmail.com>"]
+
+[build-system]
+# Specify that the project requries Poetry. I have no idea what the following
+# two lines do, and removing them doesn't seem to change anything, but at least
+# it documents that we're using Poetry. When letting Poetry initialize a new
+# project it adds the following lines.
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+# Project dependencies required for the automation to work.
+# `poetry add <name>` - Add a new dependency.
+# `poetry install` - Install all current dependencies.
+python = "^3.11"
+pytest = "^7.4.0"
+selenium = "^4.11.2"
+
+[tool.poetry.group.dev.dependencies]
+# Development-only dependencies.
+# `poetry add --G dev <name>` - Add a new development dependency.
+black = "^23.7.0"
+
+[tool.pytest.ini_options]
+# pytest configuration.
+# We use this instead of `pytest.ini` because TOML is much nicer to use than
+# the INI format, and we save adding another file to the project root.
+# See: https://docs.pytest.org/en/7.3.x/customize.html#pyproject-toml
+
+addopts = [
+    # The default style of "long" creates ridiculously long output on WebDriver
+    # errors, and out of the other options the best looking one is "short".
+    #
+    # See: https://docs.pytest.org/en/7.3.x/how-to/output.html
+    #
+    # Note: It would be nice to use the "native" option as in Python 3.11 the
+    # error messages are much nicer than any of pytest's options, however it
+    # also creates ridiculously long stack traces for simpel assertion failures
+    # so we'll stick with "short" until a better option is available.
+    '--tb=short',
+]
